@@ -45,7 +45,7 @@ main:
 
 check:
         ble $s1, 10, works
-        
+
     	# invalid number
     	li $v0, 4
     	la $a0, strerr
@@ -64,31 +64,31 @@ check:
 
 works:
 	add $s1, $0, $v0 # $s1 indicates there are N numbers in the array
-	
+
 	li $v0, 4
  	la $a0, strdiv
   	syscall
-	
+
 	# set first index to 0
 	li $s0, 0
-	
+
 	la $s2, arr1 # $s2 points to first location of array(index zero) with address arr1
 loop: beq $s0, $s1, next # when the loop is done jump to exit
 	li $v0, 4
 	la $a0, stretr
 	syscall
-	
+
 	li $v0, 1
 	add $a0, $s0, 1
 	syscall
-	
+
 	li $v0, 4
 	la $a0, strcol
 	syscall
 
 	li $v0, 5 # Get input from user
 	syscall
-	
+
 	sw $v0, 0($s2) # Store the number into the array
 	addi $s0, $s0, 1 # update the counter
 	addi $s2, $s2, 4 # increment $s2 (the array pointer) by 4 to point to the next position
@@ -115,11 +115,11 @@ print: beq $s0, $s1, exit # when the loop is done jump to exit
 	li $v0, 1 # output the content of one element of array
 	add $a0, $0, $t0
 	syscall
-	
+
 	li $v0, 4 # go to next line
 	la $a0, strskp
 	syscall
-	
+
 	addi $s0, $s0, 1 # update the counter
 	addi $s2, $s2, -4 # increment $s2 (the array pointer) by 4 to point to the next position
 	j print
