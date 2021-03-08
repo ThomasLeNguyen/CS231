@@ -84,12 +84,14 @@ addFunc:
 	
 # printNum
 printNum:
+	add $t5, $0, $a3
+
 	li $v0, 4 # print str1
 	la $a0, strsum
 	syscall
 
 	li $v0, 1 # print first number $s0
-	add $a0, $0, $a3
+	add $a0, $0, $t5
 	syscall
 	
 	li $v0, 4 # print str1
@@ -97,7 +99,3 @@ printNum:
 	syscall
 
 	jr $ra
-
-	#program end
-  	li $v0, 10
-  	syscall
