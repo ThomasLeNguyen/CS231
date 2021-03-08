@@ -6,8 +6,9 @@ strdes: .asciiz "Program Description: 			Calculates the sum of two integers twic
 straut: .asciiz "Author: 				Thomas Thuan Le Nguyen\n"
 strdat: .asciiz "Creation Date:				03/07/2021"
 
-stript: .asciiz "Input two integer :\n"
-strsum: .asciiz "\nthe sum of the numbers are:"
+stript: .asciiz "Input two integer: "
+strsum: .asciiz "the sum of the numbers are: "
+strskp: .asciiz "\n"
 
 	.text
 
@@ -30,24 +31,30 @@ main:
   	syscall
   	# header end
 
-	jal getNum # go to getNum routine
-	add $s0, $v1, $0
-	
+	li $s0, 0
+
+loop:	beq $s0, 2, done
+
 	jal getNum # go to getNum routine
 	add $s1, $v1, $0
 	
-	add $a1, $s0, $0
-	add $a2, $s1, $0
+	jal getNum # go to getNum routine
+	add $s2, $v1, $0
+	
+	add $a1, $s1, $0
+	add $a2, $s2, $0
 	jal addFunc # go to getFunc routine
 	
-	add $t3, $v1, $0
-	
-	add $a3, $t3, $0
-	
+	add $a3, $v1, $0
 	jal printNum # go to printNum routine
 	
+	addi $s0, $s0, 1
+	j loop
+
+done:
+	
 	li $v0, 10
-syscall
+	syscall
 
 # getNum
 getNum:
@@ -60,7 +67,7 @@ getNum:
 	
 	add $t5, $0, $v0 # put the number of integer need to inputed to $t5
 
-	add $a1, $0, $t5 # Passing to function by $a1
+	add $v1, $0, $t5 # Passing to function by $v1
 
 	jr $ra
 
@@ -77,10 +84,16 @@ addFunc:
 	
 # printNum
 printNum:
-	add $t0, $v1, $0
+	li $v0, 4 # print str1
+	la $a0, strsum
+	syscall
 
 	li $v0, 1 # print first number $s0
-	add $a0, $t0, $0
+	add $a0, $0, $a3
+	syscall
+	
+	li $v0, 4 # print str1
+	la $a0, strskp
 	syscall
 
 	jr $ra
