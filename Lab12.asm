@@ -175,8 +175,8 @@ FillPriceArray:
 	# gets the price total
 	li $t2, 0
 	
-	# $s3 points to the first location of array with address pceArr
-	la $s3, pceArr
+	# $t8 points to the first location of array with address pceArr
+	la $t8, pceArr
 	
 	# index $t0 starts at 0
 	li $t0, 0
@@ -225,8 +225,8 @@ FillPriceArray:
 				add $t2, $t2, $t3
 			
 				# adds price to the pceArr
-				sw $v0, 0($s3)
-				addi $s3, $s3, 4
+				sw $v0, 0($t8)
+				addi $t8, $t8, 4
 			
 				# $t0 = $t0 + 1 // $t0++
 				addi $t0, $t0, 1
@@ -265,11 +265,11 @@ FillCouponArray:
 	# gets the coupon total
 	li $t2, 0
 	
-	# $s3 points to the first location of array with address pceArr
-	la $s3, pceArr
+	# $t8 points to the first location of array with address pceArr
+	la $t8, pceArr
 	
-	# $s4 points to the first location of array with address cpnArr
-	la $s4, cpnArr
+	# $t9 points to the first location of array with address cpnArr
+	la $t9, cpnArr
 	
 	# index $t0 starts at 0
 	li $t0, 0
@@ -301,8 +301,8 @@ FillCouponArray:
 			addi $t0, $t0, 1
 			
 			# takes our the element from pceArr
-			lw $t4, 0($s3)
-			addi $s3, $s3, 4
+			lw $t4, 0($t8)
+			addi $t8, $t8, 4
 			# prints out element
 			# li $v0, 1
 			# add $a0, $t4, $0
@@ -326,8 +326,8 @@ FillCouponArray:
 				syscall
 				
 				# adds 0 to the cpnArr
-				sw $0, 0($s4)
-				addi $s4, $s4, 4
+				sw $0, 0($t9)
+				addi $t9, $t9, 4
 				
 				j CouponLoop
 				
@@ -337,8 +337,8 @@ FillCouponArray:
 				add $t2, $t2, $t3
 			
 				# adds coupon to the cpnArr
-				sw $v0, 0($s4)
-				addi $s4, $s4, 4
+				sw $v0, 0($t9)
+				addi $t9, $t9, 4
 		
 			# jump to CouponLoop
 			j CouponLoop
