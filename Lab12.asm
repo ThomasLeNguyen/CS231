@@ -72,7 +72,7 @@ CheckItemCount1:
 
 # checks the item count 2
 CheckItemCount2:
-	# if items is less than 0 go to ItemCountValid
+	# if items is less than 20 go to ItemCountValid
 	ble $s0, 20, ItemCountValid
 
 # if items count is greater than 20 or less than 0
